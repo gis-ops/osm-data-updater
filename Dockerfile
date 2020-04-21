@@ -6,7 +6,7 @@ ENV TERM xterm
 
 WORKDIR /osm_updater
 
-COPY osmosis.config /map_uploader/
+COPY osmosis.config /osm_updater/
 
 # Install everything
 RUN apt-get update && apt-get install -y software-properties-common gpg wget && \
@@ -22,14 +22,15 @@ RUN apt-get update && apt-get install -y software-properties-common gpg wget && 
 RUN wget --quiet -P /osm_updater/osmosis https://github.com/openstreetmap/osmosis/releases/download/0.47.4/osmosis-${OSMOSIS_VERSION}.tgz && \
     cd osmosis && tar xvfz osmosis-${OSMOSIS_VERSION}.tgz && rm osmosis-${OSMOSIS_VERSION}.tgz && \
     chmod a+x bin/osmosis && ln -s /osm_updater/osmosis/bin/osmosis /usr/bin/osmosis && \
-    mv /map_uploader/osmosis.config /root/.osmosis && \
+    mv /osm_updater/osmosis.config /root/.osmosis && \
     # Install regional clipping script
     cd /osm_updater && \
     git clone https://github.com/gis-ops/regional.git && \
     chmod u+x /osm_updater/regional/trim_osc.py && \
     # Make tmp dir for osmosis
-    mkdir /map_uploader/tmp
+    mkdir /osm_updater/tmp
 
-COPY docker-entrypoint.sh styles/ polys/ /map_uploader/
+COPY docker-entrypoint.sh ./
+COPY config ./
 
-ENTRYPOINT ["/bin/bash", "/map_uploader/docker-entrypoint.sh"]
+ENTRYPOINT ["/bin/bash", "/osm_updater/docker-entrypoint.sh"]
