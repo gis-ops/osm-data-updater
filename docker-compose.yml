@@ -1,0 +1,13 @@
+version: "2.4"
+services:
+  vroom:
+    network_mode: host
+    image: swisstopo/kadas-routing-osm-tools:test
+    container_name: osm-tools
+    volumes:
+      - /mnt/volume_fra1_02/tmp:/map_uploader/tmp
+      - ./osm/liechtenstein-latest.osm.pbf:/map_uploader/osm/liechtenstein-latest.osm.pbf
+    environment:
+      - OSM_DB=test
+      - OSM_FILE=liechtenstein-latest.osm.pbf
+      - TAG_SET=routing.style
