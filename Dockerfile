@@ -15,15 +15,13 @@ RUN apt-get update && apt-get install -y software-properties-common gpg wget && 
     apt-key adv --keyserver keyserver.ubuntu.com --recv A438A16C88C6BE41CB1616B8D57F48750AC4F2CB && \
     apt-get update && \
     apt-get install -y git-core osm2pgsql \
-        python3-lxml python3-psycopg2 python3-shapely default-jre && \
-    # Install osmosis
-    mkdir /osm_updater/osmosis
+        python3-lxml python3-psycopg2 python3-shapely default-jre
 
-RUN wget --quiet -P /osm_updater/osmosis https://github.com/openstreetmap/osmosis/releases/download/0.47.4/osmosis-${OSMOSIS_VERSION}.tgz && \
+RUN mkdir /osm_updater/osmosis && \
+    wget --quiet -P /osm_updater/osmosis https://github.com/openstreetmap/osmosis/releases/download/0.47.4/osmosis-${OSMOSIS_VERSION}.tgz && \
     cd osmosis && tar xvfz osmosis-${OSMOSIS_VERSION}.tgz && rm osmosis-${OSMOSIS_VERSION}.tgz && \
     chmod a+x bin/osmosis && ln -s /osm_updater/osmosis/bin/osmosis /usr/bin/osmosis && \
     mv /osm_updater/osmosis.config /root/.osmosis && \
-    osmosis --read-replication-interval-init workingDirectory=/osm_updater/osmosis && \
     # Install regional clipping script
     cd /osm_updater && \
     git clone https://github.com/gis-ops/regional.git && \
@@ -32,6 +30,8 @@ RUN wget --quiet -P /osm_updater/osmosis https://github.com/openstreetmap/osmosi
     mkdir /osm_updater/tmp
 
 COPY docker-entrypoint.sh ./
-COPY config ./
+COPY osmosis_config ./osmosis_config/
+COPY polys ./polys/
+COPY styles ./styles/
 
 ENTRYPOINT ["/bin/bash", "/osm_updater/docker-entrypoint.sh"]

@@ -5,7 +5,7 @@ services:
     image: swisstopo/kadas-routing-osm-tools:test
     container_name: osm-tools
     volumes:
-      - ./state.txt:/osm_updater/osmosis/state.txt
+      - ./state:/osm_updater/osmosis/state/
       - /mnt/volume_fra1_02/tmp:/osm_updater/tmp
       - ./osm:/osm_updater/osm
     environment:

@@ -2,7 +2,7 @@ cmd=${1}
 
 export PGPASSWORD=$POSTGRES_PASS
 
-OSMOSIS_DIR=/osm_updater/osmosis
+OSMOSIS_DIR=/osm_updater/osmosis_config
 FILENAME=/osm_updater/tmp/osmchange.osm.gz
 
 if [ "${cmd}" == 'init' ]; then
@@ -23,4 +23,4 @@ elif [ -n "${cmd}" ]; then
 fi
 
 # Keep docker running easy
-exec "$@"
+#exec "$@"
