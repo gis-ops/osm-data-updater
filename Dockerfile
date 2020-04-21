@@ -23,6 +23,7 @@ RUN wget --quiet -P /osm_updater/osmosis https://github.com/openstreetmap/osmosi
     cd osmosis && tar xvfz osmosis-${OSMOSIS_VERSION}.tgz && rm osmosis-${OSMOSIS_VERSION}.tgz && \
     chmod a+x bin/osmosis && ln -s /osm_updater/osmosis/bin/osmosis /usr/bin/osmosis && \
     mv /osm_updater/osmosis.config /root/.osmosis && \
+    osmosis --read-replication-interval-init workingDirectory=/osm_updater/osmosis && \
     # Install regional clipping script
     cd /osm_updater && \
     git clone https://github.com/gis-ops/regional.git && \
