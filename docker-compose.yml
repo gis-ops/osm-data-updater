@@ -1,13 +1,17 @@
 version: "2.4"
 services:
-  vroom:
+  osm-tools:
     network_mode: host
     image: swisstopo/kadas-routing-osm-tools:test
     container_name: osm-tools
     volumes:
       - /mnt/volume_fra1_02/tmp:/osm_updater/tmp
-      - ./osm/liechtenstein-latest.osm.pbf:/osm_updater/osm/liechtenstein-latest.osm.pbf
+      - ./osm:/osm_updater/osm
     environment:
       - OSM_DB=test
       - OSM_FILE=liechtenstein-latest.osm.pbf
       - TAG_SET=routing.style
+      - POSTGRES_HOST=localhost
+      - POSTGRES_USER=gisops
+      - POSTGRES_PASS=rocks
+      - POSTGRES_PORT=5432
