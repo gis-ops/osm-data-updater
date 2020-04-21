@@ -15,7 +15,7 @@ RUN apt-get update && apt-get install -y software-properties-common gpg wget && 
     apt-key adv --keyserver keyserver.ubuntu.com --recv A438A16C88C6BE41CB1616B8D57F48750AC4F2CB && \
     apt-get update && \
     apt-get install -y git-core osm2pgsql \
-        python3-lxml python3-psycopg2 python3-shapely && \
+        python3-lxml python3-psycopg2 python3-shapely default-jre && \
     # Install osmosis
     mkdir /osm_updater/osmosis
 
