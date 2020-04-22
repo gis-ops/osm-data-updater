@@ -74,5 +74,12 @@ wget "https://replicate-sequences.osm.mazdermind.de/?"`date -u +"%Y-%m-%dT%H:%M:
 With a simple command one can update the OSM data. This is meant to be run within a daily `cron` job:
 
 ```
-docker-compose run --rm --name osm-tools osm-tools update-db
+docker-compose run --rm --name osm-tools osm-tools update
+```
+
+E.g. a cron job can look like this:
+
+```
+# m h dom mon dow user	command
+15  15 *   *   *  root  docker-compose -f /root/test/kadas-routing-osm-updater/docker-compose.yml run --rm --name osm-tools osm-tools update >> /var/log/osm_updater.log 2>&1
 ```
