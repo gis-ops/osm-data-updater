@@ -30,7 +30,6 @@ RUN mkdir /osm_updater/osmosis && \
     mkdir /osm_updater/tmp
 
 COPY docker-entrypoint.sh ./
-COPY osmosis_config ./osmosis_config/
 COPY polys ./polys/
 COPY styles ./styles/
 
