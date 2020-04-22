@@ -3,10 +3,12 @@ services:
   osm-tools:
     network_mode: host
     image: swisstopo/kadas-routing-osm-tools:test
-    container_name: osm-tools
     volumes:
-      - /mnt/volume_fra1_02/tmp:/osm_updater/tmp
+      - ./osmosis_config:/osm_updater/osmosis_config  # necessary
+      - ./polys:/osm_updater/polys
+      - ./styles:/osm_updater/styles
       - ./osm:/osm_updater/osm
+      - /mnt/volume_fra1_02/tmp:/osm_updater/tmp
     environment:
       - OSM_DB=test
       - OSM_POLY=liechtenstein.poly
