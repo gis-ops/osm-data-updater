@@ -27,7 +27,7 @@ if [ "${cmd}" == 'create' ]; then
   fi
   osm2pgsql -s -C 2000 -c -l --hstore --hstore-match-only --style /osm_updater/styles/$TAG_SET -d $OSM_DB -H $POSTGRES_HOST -U $POSTGRES_USER /osm_updater/osm/${OSM_FILE} > /dev/null
   echo "Created OSM tables for ${OSM_FILE}"
-if [ "${cmd}" == 'append' ]; then
+elif [ "${cmd}" == 'append' ]; then
   if test -f ${OSM_FILE}; then
     echo "OSM_FILE is empty"
     exit 1
