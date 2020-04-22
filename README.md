@@ -10,9 +10,17 @@ The project relies on the presence of a PostgreSQL database which has the `hstor
 
 It's easiest to use the Docker image:
 
-`docker pull`
+`docker pull registry.gitlab.com/swiss-topo/kadas-routing-server/kadas-routing-osm-updater`
 
 ### Customization
+
+Ideally you don't customize the `volumes` section in `docker-compose.yml`, as most of the functionality relies on those directories being present.
+
+#### OSM Files
+
+Download a OSM file and place it in the `./osm` folder.
+
+Each container can only process one single OSM file. However, you can `append` data to existing tables. And if you need to update multiple areas separately, you can run multiple `docker-compose.yml` files.
 
 #### Volumes
 
@@ -43,7 +51,7 @@ See the `docker-compose.yml` for examples using the repository's defaults.
 
 ### Usage
 
-The usage of the script is built around `docker-compose`, mostly due to the variety of environment variables.
+The usage of the script is built around `docker-compose`, mostly due to the variety of environment variables and mandatory mounted volumes.
 
 #### Import of OSM data
 
