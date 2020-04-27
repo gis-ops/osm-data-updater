@@ -2,7 +2,7 @@ version: "2.4"
 services:
   osm-tools:
     network_mode: host
-    image: registry.gitlab.com/swiss-topo/kadas-routing-server/kadas-routing-osm-updater
+    image: registry.gitlab.com/gis-ops/swisstopo/kadas-routing-server/kadas-routing-osm-updater
     volumes:
       - ./osmosis_config:/osm_updater/osmosis_config  # necessary
       - ./polys:/osm_updater/polys

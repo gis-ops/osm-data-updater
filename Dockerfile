@@ -11,21 +11,18 @@ COPY osmosis.config /osm_updater/
 # Install everything
 RUN apt-get update && apt-get install -y software-properties-common gpg wget && \
     export DEBIAN_FRONTEND=noninteractive && \
-
     # Install osm2pgsql
     add-apt-repository -y ppa:osmadmins/ppa && \
     apt-key adv --keyserver keyserver.ubuntu.com --recv A438A16C88C6BE41CB1616B8D57F48750AC4F2CB && \
     apt-get update && \
     apt-get install -y git-core osm2pgsql \
         python3-lxml python3-psycopg2 python3-shapely default-jre && \
-
     # Install Osmosis
     mkdir /osm_updater/osmosis && \
     wget --quiet -P /osm_updater/osmosis https://github.com/openstreetmap/osmosis/releases/download/0.47.4/osmosis-${OSMOSIS_VERSION}.tgz && \
     cd osmosis && tar xvfz osmosis-${OSMOSIS_VERSION}.tgz && rm osmosis-${OSMOSIS_VERSION}.tgz && \
     chmod a+x bin/osmosis && ln -s /osm_updater/osmosis/bin/osmosis /usr/bin/osmosis && \
     mv /osm_updater/osmosis.config /root/.osmosis && \
-
     # Install regional clipping script
     cd /osm_updater && \
     git clone https://github.com/gis-ops/regional.git && \
