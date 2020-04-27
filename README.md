@@ -76,7 +76,7 @@ docker-compose run --rm --name osm-tools osm-tools append
 To prepare the update, execute the following command first:
 
 ```bash
-wget "https://replicate-sequences.osm.mazdermind.de/?"`date -u +"%Y-%m-%dT%H:%M:00Z"` -O state.txt
+wget "https://replicate-sequences.osm.mazdermind.de/?"`date -u +"%Y-%m-%dT%H:%M:00Z"` -O osmosis_config/state.txt
 ```
 
 With a simple command one can update the OSM data. This is meant to be run within a daily `cron` job:
