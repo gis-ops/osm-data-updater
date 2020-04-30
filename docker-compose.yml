@@ -1,7 +1,6 @@
 version: "2.4"
 services:
   osm-tools:
-    network_mode: host
     container_name: osm-tools
     image: registry.gitlab.com/gis-ops/swisstopo/kadas-routing-server/kadas-routing-osm-updater
     volumes:
